@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 8% 0;
-    min-width: 650px;
+    min-width: fit-content;
 }
 
 *,
@@ -26,11 +26,13 @@ body {
     height: 300px;
     background-color: black;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-end;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     border-radius: 15px;
     box-shadow: 0 0 20px 5px rgb(136, 136, 57);
+    margin: 0 15px;
 }
 
 .wrapper-left {
@@ -52,6 +54,24 @@ body {
     height: 50px;
     background: url(img/head.png);
     background-size: cover;
+}
+
+.head-box,
+.shadow-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.shadow-box {
+    position: absolute;
+    bottom: 25px;
+}
+
+.shadow {
+    width: 50px;
+    height: 25px;
+    background: radial-gradient(ellipse, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)80%);
 }
 
 #toggle {
@@ -104,11 +124,11 @@ body {
 
 #toggle:checked~.button>span {
     transform: rotate(45deg);
+    background: linear-gradient(270deg, lightgray 20%, black 10% 30%, white 30%);
 }
 
 #toggle:checked~.button>span::before {
-    top: 0;
-    transform: rotate(0);
+    content: none;
 }
 
 #toggle:checked~.button>span::after {
@@ -116,14 +136,22 @@ body {
     transform: rotate(90deg);
 }
 
-#toggle:checked~.wrapper-left {
+#toggle:checked~.head-box>.wrapper-left {
     animation: orbita-left 1.2s infinite ease-in-out;
     transform-origin: center top;
 }
 
-#toggle:checked~.wrapper-right {
+#toggle:checked~.head-box>.wrapper-right {
     animation: orbita-right 1.2s infinite .6s ease-in-out;
     transform-origin: center top;
+}
+
+#toggle:checked~.shadow-box>.shadow-left {
+    animation: movement-left 1.2s infinite ease-in-out;
+}
+
+#toggle:checked~.shadow-box>.shadow-right {
+    animation: movement-right 1.2s infinite .6s ease-in-out;
 }
 
 @keyframes orbita-left {
@@ -153,5 +181,35 @@ body {
     }
     100% {
         transform: rotate(0deg);
+    }
+}
+
+@keyframes movement-left {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-110px);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes movement-right {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(110px);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(0);
     }
 }
